@@ -17,6 +17,7 @@ import com.spring.dto.SearchDto;
 import com.spring.dto.UserDto;
 import com.spring.dto.responseData.ResponseData;
 import com.spring.model.entitys.User;
+import com.spring.model.entitys.role.Role;
 import com.spring.service.UserService;
 
 import eye2web.modelmapper.ModelMapper;
@@ -47,6 +48,14 @@ public class UserController {
         User userMapping = modelMapper.map(user, User.class);
         responseHttp.setStatus(true);
         responseHttp.getMessage().add("succes");
+        if (user.getRole().equalsIgnoreCase("ADMIN")) {
+           userMapping.setRole(Role.ADMIN);
+        } else if(user.getRole().equalsIgnoreCase("USER") || 
+        !user.getRole().equalsIgnoreCase("USER") || 
+        !user.getRole().equalsIgnoreCase("ADMIN")
+        || user.getRole().equalsIgnoreCase(null)){
+           userMapping.setRole(Role.USER);
+        }
         responseHttp.setPayLoad(userService.register(userMapping));
         return ResponseEntity.status(HttpStatus.OK).body(responseHttp);
      }

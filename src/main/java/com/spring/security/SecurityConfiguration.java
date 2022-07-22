@@ -29,10 +29,19 @@ public class SecurityConfiguration {
    @Autowired
    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+   /**
+    * konfigurasi http
+    * @param httpSecurity
+    * @return
+    * @throws Exception
+    */
    @Bean
    public SecurityFilterChain filterChain(HttpSecurity httpSecurity)throws Exception{
+
       httpSecurity.csrf().disable()
+      //izinkan method post dan endpoin /app/user/register bisa diakses tampa di proteksi
       .authorizeRequests().antMatchers(HttpMethod.POST, "/api/user/register").permitAll()
+      //selain endpoin /api/user/reqister dan 
       .and().authorizeRequests().anyRequest().authenticated().and()
       .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
       .and().authenticationProvider(daoAuthenticationProvider());

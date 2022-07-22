@@ -7,7 +7,7 @@ public class ResponseData<T> {
    
    private boolean status;
 
-   List<String> message = new ArrayList<String>();
+   List<String> message = new ArrayList<String  >();
 
    private T payLoad;
 

@@ -48,6 +48,13 @@ public class User implements UserDetails {
 
    public User(){}
 
+   public void setRole(Role role){
+      this.role = role;
+   }
+
+   public Role getRole(){
+      return this.role;
+   }
 
    public String getName() {
       return name;
