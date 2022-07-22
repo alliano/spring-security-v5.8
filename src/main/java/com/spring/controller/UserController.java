@@ -25,17 +25,16 @@ import eye2web.modelmapper.ModelMapper;
 @RestController
 @RequestMapping(path = "/api/user")
 public class UserController {
+
    @Autowired
    private UserService userService;
+
    @Autowired
    private ModelMapper modelMapper;
-    @PostMapping(path = "/register")
-    @CrossOrigin(origins = "http://localhost:8081")
+
+   @PostMapping(path = "/register")
+   @CrossOrigin(origins = "http://localhost:8081")
    public ResponseEntity<ResponseData<User>> register(@RequestBody @Valid UserDto user,Errors errors){
-      System.out.println(user.getName());
-      System.out.println(user.getEmail());
-      System.out.println(user.getPassword());
-      System.out.println(user.getRole());
       ResponseData<User> responseHttp = new ResponseData<User>();
      if(errors.hasErrors()){
         for (ObjectError error : errors.getAllErrors()) {

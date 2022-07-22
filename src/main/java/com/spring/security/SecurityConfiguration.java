@@ -41,9 +41,11 @@ public class SecurityConfiguration {
       httpSecurity.csrf().disable()
       //izinkan method post dan endpoin /app/user/register bisa diakses tampa di proteksi
       .authorizeRequests().antMatchers(HttpMethod.POST, "/api/user/register").permitAll()
-      //selain endpoin /api/user/reqister dan 
+      //selain endpoin /api/user/reqister dengan method post  maka akan di protected
       .and().authorizeRequests().anyRequest().authenticated().and()
+      //untuk sesion management
       .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+      //untuk memberitau spring security encription  password nya menggunakan apa dan service nya yg mna
       .and().authenticationProvider(daoAuthenticationProvider());
       return httpSecurity.build();
    }
@@ -63,9 +65,9 @@ public class SecurityConfiguration {
    @Bean
    public WebMvcConfigurer webMvcConfigurer(){
       return new WebMvcConfigurer() {
-         
          @Override
          public void addCorsMappings(CorsRegistry registry) {
+            //untuk configurasi cors
             registry.addMapping("/")
             .allowedOrigins("*")
             .allowedHeaders("*")
