@@ -15,6 +15,7 @@ import com.spring.model.repositorys.UserRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
+//harus implement class detail untuk meload user di spring security
 @Slf4j
 @Service
 public class UserService implements UserDetailsService{
@@ -50,12 +51,6 @@ public class UserService implements UserDetailsService{
          }
       }
    }
-
-   // public User register(User user){
-   //    user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-   //    return userRepository.save(user);
-   // }
-
    public User findByemail(String email){
       return userRepository.findByEmail(email).orElseThrow(() -> 
       new UsernameNotFoundException("user not found"));
